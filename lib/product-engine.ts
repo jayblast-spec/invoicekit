@@ -1,69 +1,94 @@
 export type IntelligenceInput = { input?: string };
-
 const product = {
   "repo": "InvoiceKit",
   "suite": "Professional Utility",
-  "category": "Invoice operations",
-  "audience": "freelancers, agencies, trades, and small businesses",
-  "promise": "create invoices that look premium, track risk, and get paid faster",
-  "inputLabel": "Client, work, amount, and payment terms",
-  "placeholder": "Client: Green Cafe. Website refresh. $2,400. Due in 7 days.",
-  "primary": "Build invoice",
-  "gradient": "from-green-300 via-emerald-200 to-teal-300",
+  "domain": "Payment operations",
+  "accent": "from-green-300 via-emerald-200 to-teal-300",
+  "hero": "Create invoices that look premium and push payment forward.",
+  "sub": "InvoiceKit helps freelancers, agencies, trades, and small businesses create polished invoices, detect payment risk, plan reminders, and maintain a client ledger.",
+  "input": "Client Green Cafe, website refresh, $2,400, 50% deposit paid, balance due in 7 days",
+  "cta": "Build payment plan",
+  "score": "Payment readiness",
   "modules": [
-    "Invoice builder",
-    "Late-payment risk",
-    "Payment terms advisor",
-    "Reminder schedule",
-    "Client ledger"
+    [
+      "Invoice builder",
+      "Create clear line items, terms, tax notes, and payment instructions."
+    ],
+    [
+      "Payment risk",
+      "Flag late-payment patterns and vague terms."
+    ],
+    [
+      "Reminder schedule",
+      "Plan professional follow-ups before the invoice becomes overdue."
+    ],
+    [
+      "Client ledger",
+      "Remember work, payments, promises, and disputes."
+    ]
   ],
-  "outputs": [
-    "Invoice summary",
-    "Payment terms",
-    "Follow-up email",
-    "Risk warning"
+  "rows": [
+    [
+      "Deposit invoice",
+      "Cash flow",
+      "High",
+      "Clarify what is due now and what unlocks the next phase."
+    ],
+    [
+      "Final invoice",
+      "Delivery",
+      "Medium",
+      "Tie payment to accepted deliverables."
+    ],
+    [
+      "Late reminder",
+      "Recovery",
+      "High",
+      "Follow up without damaging the relationship."
+    ],
+    [
+      "Client ledger",
+      "Memory",
+      "Medium",
+      "Track trust, terms, and future pricing."
+    ]
   ],
-  "next": [
-    "PDF invoice export",
-    "Stripe payment links",
-    "late-payment prediction",
-    "client ledger memory"
+  "missions": [
+    [
+      "PDF invoice export",
+      "Generate polished downloadable invoices."
+    ],
+    [
+      "Stripe payment links",
+      "Let clients pay immediately."
+    ],
+    [
+      "Late-payment predictor",
+      "Score risk before work begins."
+    ],
+    [
+      "Client memory",
+      "Remember terms, disputes, and payment behavior."
+    ]
   ]
 } as const;
-
-function score(text: string) {
-  const length = text.trim().length;
-  const diversity = new Set(text.toLowerCase().replace(/[^a-z0-9 ]/g, '').split(/\s+/).filter(Boolean)).size;
-  return Math.min(97, 48 + Math.floor(length / 7) + Math.min(28, diversity));
-}
-
+function scoreFor(subject: string) { let score = 57 + Math.min(30, Math.floor(subject.length / 6)); if (/risk|urgent|investor|client|payment|contract|meeting|decision|launch|proof|delay/i.test(subject)) score += 7; return Math.min(98, score); }
+function band(score: number) { return score >= 86 ? 'strong' : score >= 72 ? 'ready' : score >= 60 ? 'needs review' : 'starter'; }
 export function generateIntelligence({ input = '' }: IntelligenceInput) {
-  const subject = input.trim() || product.placeholder;
-  const confidence = score(subject);
-  const urgency = confidence > 82 ? 'high' : confidence > 66 ? 'medium' : 'starter';
+  const subject = input.trim() || product.input;
+  const score = scoreFor(subject);
   return {
     product: product.repo,
-    category: product.category,
+    brand: 'ArkNet Digital',
+    suite: product.suite,
+    domain: product.domain,
     subject,
-    confidence,
-    urgency,
-    executive_summary: product.promise,
-    immediate_outputs: product.outputs.map((output, index) => ({
-      title: output,
-      detail: output + ' for: ' + subject,
-      priority: index === 0 ? 'primary' : index === 1 ? 'supporting' : 'next'
-    })),
-    automation_plan: product.modules.map((module, index) => ({
-      stage: index + 1,
-      module,
-      value: 'Automate ' + module.toLowerCase() + ' so ' + product.audience + ' can move faster with less manual work.'
-    })),
-    future_addons: product.next.map((addon, index) => ({
-      name: addon,
-      horizon: index < 2 ? 'v2' : 'v3',
-      contributor_lane: index % 2 === 0 ? 'integration' : 'product intelligence'
-    })),
-    contributor_brief: 'Improve ' + product.repo + ' by making ' + product.category.toLowerCase() + ' easier for ' + product.audience + '.',
+    score,
+    status: band(score),
+    executive_summary: product.sub,
+    intelligence_map: product.modules.map(([label, value]) => ({ label, value, status: score >= 72 ? 'priority' : 'review' })),
+    action_queue: product.rows.slice(0, 3).map(([item, owner, priority, note]) => ({ action: item + ' - ' + owner, priority, impact: note })),
+    contributor_lanes: product.missions.map(([lane, mission]) => ({ lane, mission })),
     generated_at: new Date().toISOString()
   };
 }
