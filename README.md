@@ -1,37 +1,38 @@
 # InvoiceKit
 
-InvoiceKit is part of ArkNet Digital's Professional Utility.
+InvoiceKit is an ArkNet Digital product in the Professional Utility.
 
 ## Promise
 
-create invoices that look premium, track risk, and get paid faster
+Create invoices that look premium and push payment forward.
 
-## Built For
+InvoiceKit helps freelancers, agencies, trades, and small businesses create polished invoices, detect payment risk, plan reminders, and maintain a client ledger.
 
-freelancers, agencies, trades, and small businesses
+## Current v1
 
-## Product Modules
+- Bespoke product cockpit UI
+- Live product-specific intake
+- `POST /api/intelligence`
+- Product-specific scoring and action queue
+- Contributor mission lanes
+- Mobile-friendly layout
 
-- Invoice builder
-- Late-payment risk
-- Payment terms advisor
-- Reminder schedule
-- Client ledger
+## Contributor Missions
 
-## Open Source Direction
-
-This repo is open to contributors because strong ideas move faster when serious builders can inspect, improve, and extend them. The goal is not secrecy. The goal is speed, quality, and contribution.
-
-## First Workflow
-
-1. Enter real context.
-2. Generate a useful first output.
-3. Review risk, confidence, or next action.
-4. Save the result into product memory in a future paid workspace.
+- PDF invoice export: Generate polished downloadable invoices.
+- Stripe payment links: Let clients pay immediately.
+- Late-payment predictor: Score risk before work begins.
+- Client memory: Remember terms, disputes, and payment behavior.
 
 ## Run Locally
 
 ```bash
 npm install
 npm run dev
+```
+
+## Build
+
+```bash
+npm run build
 ```
