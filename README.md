@@ -1,6 +1,6 @@
 # InvoiceKit
 
-InvoiceKit is part of Joy Ogunleye's Professional Utility.
+InvoiceKit is part of ArkNet Digital's Professional Utility.
 
 ## Promise
 
