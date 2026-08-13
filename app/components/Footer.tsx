@@ -1,14 +1,15 @@
 const ALL_TOOLS = [
   { name: "BriefOS", desc: "AI brief generator", url: "https://briefos-silk.vercel.app", live: true },
   { name: "PostCraft", desc: "LinkedIn & X post writer", url: "https://postcraft-one.vercel.app", live: true },
-  { name: "ExposureWatch", desc: "Digital exposure checker", url: "https://exposure-watch.vercel.app", live: true },
+  { name: "InvoiceKit", desc: "Invoice generator", url: "https://invoicekit-pi.vercel.app", live: true },
   { name: "PortGuard", desc: "IP & port scanner", url: "https://portguard-six.vercel.app", live: true },
   { name: "SafeLink", desc: "URL phishing scanner", url: "https://safelink-wheat.vercel.app", live: true },
   { name: "SubnetPilot", desc: "CIDR subnet calculator", url: "https://subnetpilot.vercel.app", live: true },
   { name: "ThreatPulse", desc: "CVE threat feed", url: "https://threatpulse-six.vercel.app", live: true },
-  { name: "DayForge", desc: "AI day planner", url: null, live: false },
-  { name: "MeetingMind", desc: "Meeting notes → actions", url: null, live: false },
-  { name: "ContractLens", desc: "Contract risk scanner", url: null, live: false },
+  { name: "MeetingMind", desc: "Meeting notes → actions", url: "https://meetingmind-pied-one.vercel.app", live: true },
+  { name: "ContractLens", desc: "Contract risk scanner", url: "https://contractlens-rho.vercel.app", live: true },
+  { name: "ExposureWatch", desc: "Digital exposure checker", url: null, live: false },
+  { name: "DayForge", desc: "AI day planner", url: "https://dayforge-psi.vercel.app", live: true },
 ];
 
 const CURRENT = "InvoiceKit";
