@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Invoice, LineItem, defaultInvoice, subtotal, taxAmount, total, fmt, CURRENCIES,
@@ -18,9 +18,22 @@ function Field({ label, children }: { label: string; children: React.ReactNode }
 }
 
 export default function InvoiceBuilder() {
-  const [inv, setInv] = useState<Invoice>(defaultInvoice);
+  // number/date/dueDate depend on Date.now(), which differs between server
+  // and client render — start blank (identical on server + client) and fill
+  // in the real values client-side after mount to avoid a hydration mismatch.
+  const [inv, setInv] = useState<Invoice>(() => ({
+    ...defaultInvoice(),
+    number: "",
+    date: "",
+    dueDate: "",
+  }));
   const [preview, setPreview] = useState(false);
   const printRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const d = defaultInvoice();
+    setInv((p) => ({ ...p, number: d.number, date: d.date, dueDate: d.dueDate }));
+  }, []);
 
   const upd = (key: keyof Invoice, val: string | number) =>
     setInv((p) => ({ ...p, [key]: val }));
