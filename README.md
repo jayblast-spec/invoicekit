@@ -33,8 +33,19 @@ InvoiceKit lets a freelancer or small business build a professional invoice dire
 ## How It Works
 
 - Built on Next.js App Router (`app/page.tsx`) with client-side state for the invoice form and live preview, animated with Framer Motion.
-- `app/api/intelligence/route.ts` is a server route that evaluates invoice/client data for risk signals separately from the client-side rendering path.
-- Styling is Tailwind CSS 4; the whole flow — data entry to PDF — runs without a database or user account.
+- `app/components/invoiceTypes.ts` computes `subtotal`, `taxAmount`, and `total` from real line-item math (quantity × rate per item, summed, then tax rate applied), with multi-currency formatting (USD, GBP, EUR, CAD, AUD, NGN).
+- The "Download PDF" step calls `window.print()` against a print-formatted view — no PDF library, no server round-trip.
+- Styling is Tailwind CSS 4; the whole flow — data entry to PDF — runs without a database or user account, entirely in the browser.
+
+## Engineering Notes
+
+**The real problem:** invoices contain real financial numbers — line items, tax, totals — and a tool that sends those to a server just to render a PDF is taking on a data-handling liability the task doesn't need.
+
+**The approach:** `subtotal`/`taxAmount`/`total` compute directly from the in-memory line-item state, and the PDF step reuses the browser's own print pipeline against a print-specific CSS view rather than shipping a PDF-generation library — no invoice data ever leaves the client.
+
+**One real number:** 6 currencies are supported with proper formatting (USD, GBP, EUR, CAD, AUD, NGN) — not a single hardcoded `$`.
+
+**Not handled yet:** `app/api/intelligence` is a separate, disconnected decorative endpoint — it does not evaluate real risk signals and isn't part of the invoice calculation path.
 
 ## Live
 
