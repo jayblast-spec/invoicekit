@@ -7,7 +7,6 @@
 InvoiceKit is a browser-based invoicing tool that turns client billing into a 30-second task: build a professional, client-ready invoice, run it through a built-in risk/intelligence check, and get paid faster — no account, no server-side storage, no setup.
 
 <p>
-  <a href="https://invoicekit-pi.vercel.app"><img alt="Live Demo" src="https://img.shields.io/badge/Live-Demo-1D4ED8?style=for-the-badge&logo=vercel&logoColor=white"></a>
   <a href="https://github.com/jayblast-spec/invoicekit"><img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
@@ -49,7 +48,7 @@ InvoiceKit lets a freelancer or small business build a professional invoice dire
 
 ## Live
 
-Production: **https://invoicekit-pi.vercel.app**
+Production: *(demo temporarily offline)*
 
 ## Tech Stack
 
